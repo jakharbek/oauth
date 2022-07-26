@@ -31,7 +31,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("Single sign-on (SSO) OAuth Javharbek2 - OAuth2")
+                .title("Single sign-on (SSO) OAuth Javharbek - OAuth2")
                 .description("\"Single sign-on technology is a technology whereby a user navigates from one section of the portal to another, or from one system to another, not associated with the first system, without re-authentication.\"")
                 .version("1.0.0")
                 .license("Open Source Product - Javharbek")
