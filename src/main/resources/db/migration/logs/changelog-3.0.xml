@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="seed-1" author="javharbek">
+        <insert tableName="oauth_client_details">
+            <column name="client_id" value="oauth"/>
+            <column name="client_secret" value="{bcrypt}$2a$12$Dj8ZjPD1M2keZc257genw./wEMQ9c/dmn9YG69F3/.iLu6hhUqkhC"/>
+            <column name="scope" value="read,write"/>
+            <column name="authorized_grant_types" value="password,refresh_token,client_credentials,authorization_code"/>
+            <column name="authorities" value="ROLE_TRUSTED_CLIENT"/>
+            <column name="access_token_validity" value="30000"/>
+            <column name="refresh_token_validity" value="18000"/>
+        </insert>
+
+        <insert tableName="auth_role">
+            <column name="role_name" value="admin"/>
+            <column name="description" value="Admin"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="role_name" value="user"/>
+            <column name="description" value="User"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

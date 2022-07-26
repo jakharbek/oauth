@@ -1,0 +1,22 @@
+ARG HTTP_PROXY
+
+FROM adigitalteam/springbootbase as builder
+ENV http_proxy http://172.28.6.100:1234
+ENV https_proxy http://172.28.6.100:1234
+ENV no_proxy 127.0.0.1,app,localhost
+RUN mkdir /application
+WORKDIR /application
+COPY src src
+COPY pom.xml pom.xml
+COPY ojdbc6-12.1.0.2.jar ojdbc6-12.1.0.2.jar
+
+RUN mvn install:install-file -DproxySet=true -DproxyHost=172.28.6.100 -DproxyPort=1234 -Dfile=ojdbc6-12.1.0.2.jar -DgroupId=com.oracle  -DartifactId=oracle -Dversion=12.1.0.2 -Dpackaging=jar -DgeneratePom=true
+RUN mvn package -DproxySet=true -DproxyHost=172.28.6.100 -DproxyPort=1234
+
+FROM openjdk:11.0.7-jre
+ENV http_proxy http://172.28.6.100:1234
+ENV https_proxy http://172.28.6.100:1234
+ENV no_proxy 127.0.0.1,app,localhost
+COPY --from=builder /application/target/*.jar /app/lib/application.jar
+WORKDIR /app/lib
+ENTRYPOINT ["java", "-jar", "-Doracle.jdbc.timezoneAsRegion=false", "application.jar"]

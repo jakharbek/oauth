@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="2-oauth" author="javharbek">
+        <createTable tableName="user_role">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user_role_id"/>
+            </column>
+            <column name="user_id" type="BIGINT"></column>
+            <column name="role_id" type="BIGINT"></column>
+        </createTable>
+        <createTable tableName="user_permission">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user_permission_id"/>
+            </column>
+            <column name="user_id" type="BIGINT"></column>
+            <column name="permission_id" type="BIGINT"></column>
+        </createTable>
+        <createTable tableName="auth_role">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_auth_role_id"/>
+            </column>
+            <column name="role_name" type="varchar(256)"></column>
+            <column name="description" type="varchar(256)"></column>
+        </createTable>
+        <createTable tableName="auth_permission">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_auth_permission_id"/>
+            </column>
+            <column name="permission_name" type="varchar(256)"></column>
+            <column name="description" type="varchar(256)"></column>
+        </createTable>
+        <createTable tableName="auth_user">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_auth_user_id"/>
+            </column>
+            <column name="user_name" type="varchar(256)"></column>
+            <column name="password" type="varchar(256)"></column>
+            <column name="email" type="varchar(256)"></column>
+            <column name="phone" type="varchar(256)"></column>
+            <column name="status" type="varchar(256)"></column>
+            <column name="created_datetime" type="DATETIME"></column>
+        </createTable>
+        <createTable tableName="auth_token">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_auth_token_id"/>
+            </column>
+            <column name="token" type="varchar(256)"></column>
+            <column name="secret" type="varchar(256)"></column>
+            <column name="data" type="varchar(256)"></column>
+            <column name="data_type" type="varchar(256)"></column>
+            <column name="type" type="varchar(256)"></column>
+            <column name="status" type="varchar(256)"></column>
+            <column name="created_datetime" type="DATETIME"></column>
+            <column name="expired_duration" type="BIGINT"></column>
+            <column name="identity_id" type="varchar(256)"></column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="seed-2" author="javharbek">
+        <insert tableName="auth_user">
+            <column name="user_name" value="javharbek"/>
+            <column name="password" value="{bcrypt}$2a$12$tSpt2MNZNlhWN/aPZIz6tulrI9pGdULJ4jjrfyY9CvI/G2BducozS"/>
+            <column name="email" value="jakharbek@gmail.com"/>
+            <column name="phone" value="+998901112233"/>
+            <column name="status" value="0"/>
+            <column name="created_datetime" value="2022-06-08 11:16:47.338412"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

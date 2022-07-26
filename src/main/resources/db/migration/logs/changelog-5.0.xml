@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="5-file" author="javharbek">
+
+        <createTable tableName="file">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_file_id"/>
+            </column>
+            <column name="title" type="VARCHAR(4096)"></column>
+            <column name="description" type="VARCHAR(4096)"></column>
+            <column name="size" type="BIGINT"></column>
+            <column name="file" type="VARCHAR(4096)"></column>
+            <column name="extension" type="varchar(24)"></column>
+            <column name="status" type="INTEGER"></column>
+            <column name="created_datetime" type="DATETIME"></column>
+            <column name="updated_datetime" type="DATETIME"></column>
+            <column name="deleted_datetime" type="DATETIME"></column>
+            <column name="is_deleted" type="BOOLEAN"></column>
+            <column name="host" type="VARCHAR(4096)"></column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

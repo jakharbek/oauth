@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Setup key
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.sshkey1 }}" > "$HOME/.ssh/sshkey1"
+      - run: chmod 600 "$HOME/.ssh/sshkey1"
+      # Deploy
+      - run: rsync -e "ssh -p 22 -i $HOME/.ssh/sshkey1 -o StrictHostKeyChecking=no" --archive --compress . root@javharbek.uz:/projects/oauth
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with: 
+            host: javharbek.uz
+            username: root
+            key: ${{ secrets.sshkey1 }}
+            port: 22
+            script: |
+              cd /projects/oauth
+              docker-compose -f docker-compose-dev.yml up -d --build
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+            
+            Repository: ${{ github.repository }}
+            
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
